@@ -1,8 +1,9 @@
 package com.work.workmanager
 
 import android.content.Context
-import androidx.work.CoroutineWorker
-import androidx.work.WorkerParameters
+import android.util.Log
+import androidx.work.*
+import java.util.concurrent.TimeUnit
 
 /**
  * WorkManager
@@ -20,8 +21,17 @@ class Worker(appContext: Context, parameters: WorkerParameters) : CoroutineWorke
     override suspend fun doWork(): Result {
 
         try {
+            Log.e(WORK_NAME, "DoWork")
 
-            //Work
+            val constraints = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
+
+            val oneTimeWorkRequest = OneTimeWorkRequestBuilder<Worker>().
+                setInitialDelay(getOneDayIntervalTime(), TimeUnit.MILLISECONDS).
+                setConstraints(constraints).build()
+
+            WorkManager.getInstance(applicationContext).enqueueUniqueWork(WORK_NAME, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest)
 
         }catch (e: Exception){
             Result.retry()
