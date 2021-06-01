@@ -29,4 +29,5 @@ WorkManager는 지연 가능한 비동기 작업을 쉽게 예약할 수 있는 
 
 # 참고
 
-[블로그](https://ryan94.tistory.com/33)
+[WorkManger 설명](https://ryan94.tistory.com/33)
+[WorkManger 샘플](https://ryan94.tistory.com/34)
